@@ -3,12 +3,9 @@ package com.demoapps.supremo.view
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demoapps.supremo.R
 import com.demoapps.supremo.adapter.RecentSearchAdapter
@@ -29,7 +26,7 @@ import kotlinx.android.synthetic.main.activity_homescreen.*
 class HomeScreen : ActivityBase(), FlowCallBack, RecentSearchCallBack {
     private var homeScreenViewModel: HomeScreenViewModel? = null
     private val recentSearch = ArrayList<String>()
-    private var recentSearchSet:Set<String>? = null
+    private var recentSearchSet: Set<String>? = null
     private var sharedPreferences: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,20 +50,24 @@ class HomeScreen : ActivityBase(), FlowCallBack, RecentSearchCallBack {
         initRecentSearch()
     }
 
-    private fun initSharedPref(){
-        sharedPreferences = this.getSharedPreferences(ApplicationConstants.RECENT_SEARCHES_SHARED_PREF_FILE, Context.MODE_PRIVATE)
+    private fun initSharedPref() {
+        sharedPreferences = this.getSharedPreferences(
+            ApplicationConstants.RECENT_SEARCHES_SHARED_PREF_FILE,
+            Context.MODE_PRIVATE
+        )
     }
 
     private fun initRecentSearch() {
-        recentSearchSet = sharedPreferences?.getStringSet(ApplicationConstants.RECENT_SEARCHES_KEY, null)
+        recentSearchSet =
+            sharedPreferences?.getStringSet(ApplicationConstants.RECENT_SEARCHES_KEY, null)
         recentSearchSet?.forEach {
             recentSearch.add(it)
         }
 
-        if(recentSearch.isEmpty()){
+        if (recentSearch.isEmpty()) {
             noItemsError.visibility = View.VISIBLE
             rvRecentSearch.visibility = View.GONE
-        }else{
+        } else {
             noItemsError.visibility = View.GONE
             rvRecentSearch.visibility = View.VISIBLE
         }
@@ -111,28 +112,33 @@ class HomeScreen : ActivityBase(), FlowCallBack, RecentSearchCallBack {
         }
     }
 
-    private fun putSuccessFullSearchToSharedPref(){
+    private fun putSuccessFullSearchToSharedPref() {
         val sharedPreferencesEditor = sharedPreferences?.edit()
-        val updatedRecentSearch= HashSet<String>()
+        val updatedRecentSearch = HashSet<String>()
         recentSearch.add(Router.searchSuperHeroName)
         updatedRecentSearch.addAll(recentSearch)
 
-        sharedPreferencesEditor?.putStringSet(ApplicationConstants.RECENT_SEARCHES_KEY, updatedRecentSearch)
+        sharedPreferencesEditor?.putStringSet(
+            ApplicationConstants.RECENT_SEARCHES_KEY,
+            updatedRecentSearch
+        )
         sharedPreferencesEditor?.apply()
     }
 
-    private fun putReceivedResultInRouter(mainResponse: MainResponse){
+    private fun putReceivedResultInRouter(mainResponse: MainResponse) {
         Router.superHerosList.clear()
-        for((index, item) in mainResponse.results.withIndex()){
+        for ((index, item) in mainResponse.results.withIndex()) {
             val superHeroDetails = SuperHeroData()
             superHeroDetails.name = item.superHeroName
             superHeroDetails.groupAffiliation = item.connections.groupAffiliation
             superHeroDetails.imageUrl = item.superHeroImage.url
             superHeroDetails.race = item.appearance.race
             superHeroDetails.gender = item.appearance.gender
-            if(item.appearance.height.size == 1){
+            superHeroDetails.eyeColor = item.appearance.eyeColor
+            superHeroDetails.hairColor = item.appearance.hairColor
+            if (item.appearance.height.size == 1) {
                 superHeroDetails.height = item.appearance.height[0]
-            }else if(item.appearance.height.size == 2){
+            } else if (item.appearance.height.size == 2) {
                 superHeroDetails.height = item.appearance.height[1]
             }
             Router.superHerosList.add(superHeroDetails)

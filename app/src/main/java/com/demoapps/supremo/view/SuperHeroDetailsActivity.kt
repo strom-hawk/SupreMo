@@ -29,6 +29,10 @@ class SuperHeroDetailsActivity: ActivityBase() {
         superHeroRaceValue.text = Router.superHerosList.get(Router.selectedSuperHeroNumber).race
         superHeroGenderValue.text = Router.superHerosList.get(Router.selectedSuperHeroNumber).gender
         superHeroHeightValue.text = Router.superHerosList.get(Router.selectedSuperHeroNumber).height
+        superHeroEyeColorValue.text = Router.superHerosList.get(Router.selectedSuperHeroNumber).eyeColor
+        superHeroHairColorValue.text = Router.superHerosList.get(Router.selectedSuperHeroNumber).hairColor
+
+
         Picasso.get().load(Router.superHerosList.get(Router.selectedSuperHeroNumber).imageUrl).into(superHeroImageView)
     }
 }

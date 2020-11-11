@@ -8,6 +8,8 @@ public class SuperHeroData {
     private String gender;
     private String race;
     private String height;
+    private String hairColor;
+    private String eyeColor;
 
     public String getName() {
         return name;
@@ -55,5 +57,21 @@ public class SuperHeroData {
 
     public void setHeight(String height) {
         this.height = height;
+    }
+
+    public String getHairColor() {
+        return hairColor;
+    }
+
+    public void setHairColor(String hairColor) {
+        this.hairColor = hairColor;
+    }
+
+    public String getEyeColor() {
+        return eyeColor;
+    }
+
+    public void setEyeColor(String eyeColor) {
+        this.eyeColor = eyeColor;
     }
 }

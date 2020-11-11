@@ -17,7 +17,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="@dimen/dp_70"
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_10"
@@ -51,6 +51,17 @@
 
         </RelativeLayout>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvRecentSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recent Searches"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/sp_22"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingEnd="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRecentSearch"

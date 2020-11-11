@@ -2,7 +2,7 @@
     <string name="app_name">SupreMo</string>
     <string name="something_went_wrong">Something went wrong</string>
 
-    <string name="search_box_hint">Enter Text</string>
+    <string name="search_box_hint">Search your superhero</string>
     <string name="search_box_error">Please enter text to be searched</string>
 
     <string name="alert_title">Alert !</string>

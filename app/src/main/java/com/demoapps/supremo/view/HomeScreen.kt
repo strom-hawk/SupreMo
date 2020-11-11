@@ -39,6 +39,8 @@ class HomeScreen : ActivityBase(), FlowCallBack, RecentSearchCallBack {
 
     private fun init() {
         homeScreenViewModel = HomeScreenViewModel(this)
+        val linearLayoutManager = LinearLayoutManager(this)
+        rvRecentSearch.layoutManager = linearLayoutManager
         initSharedPref()
         initRecentSearch()
     }
@@ -59,11 +61,9 @@ class HomeScreen : ActivityBase(), FlowCallBack, RecentSearchCallBack {
         }else{
             noItemsError.visibility = View.GONE
             rvRecentSearch.visibility = View.VISIBLE
-            val linearLayoutManager = LinearLayoutManager(this)
-            rvRecentSearch.layoutManager = linearLayoutManager
-            rvRecentSearch.adapter = RecentSearchAdapter(this, recentSearch, this)
-            rvRecentSearch.adapter?.notifyDataSetChanged()
         }
+        rvRecentSearch.adapter = RecentSearchAdapter(this, recentSearch, this)
+        rvRecentSearch.adapter?.notifyDataSetChanged()
     }
 
     private fun bindView() {
@@ -88,6 +88,8 @@ class HomeScreen : ActivityBase(), FlowCallBack, RecentSearchCallBack {
     override fun onApiSuccess(mainResponse: MainResponse) {
         progressBarLayout.visibility = View.GONE
         rvRecentSearch.visibility = View.VISIBLE
+        noItemsError.visibility = View.GONE
+
         if (mainResponse.response.equals(ApplicationConstants.TXN_ERROR)) {
             CommonUtils.showAlertDialog(this, mainResponse.errorMessage, false)
         } else {

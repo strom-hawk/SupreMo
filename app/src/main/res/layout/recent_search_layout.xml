@@ -7,7 +7,7 @@
     android:padding="@dimen/dp_5"
     android:layout_marginTop="@dimen/dp_5"
     android:layout_marginBottom="@dimen/dp_5"
-    android:background="@color/colorWhite">
+    android:background="@drawable/recent_background_item">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -20,7 +20,8 @@
                     android:text="Name"
                     android:textColor="@color/colorBlack"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/dp_10"/>
+                    android:layout_marginStart="@dimen/dp_10"
+                    android:textSize="@dimen/sp_16"/>
 
                 <ImageView
                     android:layout_width="@dimen/dp_20"
@@ -31,5 +32,4 @@
                     android:layout_marginEnd="@dimen/dp_10"/>
 
             </RelativeLayout>
-
 </LinearLayout>

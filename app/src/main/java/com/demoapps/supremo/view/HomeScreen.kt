@@ -3,9 +3,12 @@ package com.demoapps.supremo.view
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demoapps.supremo.R
 import com.demoapps.supremo.adapter.RecentSearchAdapter
@@ -31,10 +34,15 @@ class HomeScreen : ActivityBase(), FlowCallBack, RecentSearchCallBack {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.supportActionBar?.hide()
+        setToolbar(ApplicationConstants.SUPERHEROS_AND_VILLAINS)
         setContentView(R.layout.activity_homescreen)
         init()
         bindView()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        this.finish()
+        return super.onSupportNavigateUp()
     }
 
     private fun init() {
@@ -68,6 +76,7 @@ class HomeScreen : ActivityBase(), FlowCallBack, RecentSearchCallBack {
 
     private fun bindView() {
         searchButton.setOnClickListener {
+            hideKeyboard()
             if (TextUtils.isEmpty(etSearchText.text)) {
                 CommonUtils.showAlertDialog(this, getString(R.string.search_box_error), false)
             } else {

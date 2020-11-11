@@ -1,7 +1,11 @@
 package com.demoapps.supremo.view
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import com.demoapps.supremo.R
+import com.demoapps.supremo.utils.ApplicationConstants
 import com.demoapps.supremo.utils.Router
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_super_hero_details.*
@@ -9,9 +13,14 @@ import kotlinx.android.synthetic.main.activity_super_hero_details.*
 class SuperHeroDetailsActivity: ActivityBase() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.supportActionBar?.hide()
+        setToolbar(Router.superHerosList.get(Router.selectedSuperHeroNumber).name)
         setContentView(R.layout.activity_super_hero_details)
         init()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        this.finish()
+        return super.onSupportNavigateUp()
     }
 
     private fun init(){

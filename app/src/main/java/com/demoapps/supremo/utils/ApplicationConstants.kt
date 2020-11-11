@@ -10,4 +10,7 @@ object ApplicationConstants {
     val RECENT_SEARCHES_SHARED_PREF_FILE = "RECENT_SEARCHES_FILE"
     val RECENT_SEARCHES_KEY = "RECENT_SEARCHES_KEY"
     val EMPTY_STRING = ""
+    val TOOL_BAR_COLOR = "#434343"
+    val SUPERHEROS_AND_VILLAINS = "SuperHeros & Villains"
+    val RESULTS = "RESULTS"
 }

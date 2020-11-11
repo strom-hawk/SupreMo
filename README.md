@@ -6,7 +6,7 @@
 
 
 </br>
-An android application delivers details of superheros in your fingertips. Following are some of the information about the project:
+An android application delivers details of superheros in your fingertips. Following are some of the information about the project:</br>
 1. Platform: Android Native</br>
 2. Architecture: MVVM</br>
 3. Languages used: Kotlin(75%) and java(25%)</br>

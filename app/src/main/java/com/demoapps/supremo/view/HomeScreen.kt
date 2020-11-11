@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.demoapps.supremo.R
 import com.demoapps.supremo.adapter.RecentSearchAdapter
 import com.demoapps.supremo.interfaces.FlowCallBack
+import com.demoapps.supremo.interfaces.RecentSearchCallBack
 import com.demoapps.supremo.model.MainResponse
 import com.demoapps.supremo.utils.ApplicationConstants
 import com.demoapps.supremo.utils.CommonUtils
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_homescreen.*
 *This class is the landing page of the application
 */
 
-class HomeScreen : ActivityBase(), FlowCallBack {
+class HomeScreen : ActivityBase(), FlowCallBack, RecentSearchCallBack {
     private var homeScreenViewModel: HomeScreenViewModel? = null
     private val tempData = ArrayList<String>()
     private val recentSearch = ArrayList<String>()
@@ -59,7 +60,7 @@ class HomeScreen : ActivityBase(), FlowCallBack {
             rvRecentSearch.visibility = View.VISIBLE
             val linearLayoutManager = LinearLayoutManager(this)
             rvRecentSearch.layoutManager = linearLayoutManager
-            rvRecentSearch.adapter = RecentSearchAdapter(this, recentSearch)
+            rvRecentSearch.adapter = RecentSearchAdapter(this, recentSearch, this)
             rvRecentSearch.adapter?.notifyDataSetChanged()
         }
     }
@@ -107,5 +108,10 @@ class HomeScreen : ActivityBase(), FlowCallBack {
         progressBarLayout.visibility = View.GONE
         rvRecentSearch.visibility = View.VISIBLE
         CommonUtils.showAlertDialog(this, getString(R.string.something_went_wrong), false)
+    }
+
+    override fun onItemClickListener(itemName: String) {
+        Router.searchSuperHeroName = itemName
+        fetchResult()
     }
 }

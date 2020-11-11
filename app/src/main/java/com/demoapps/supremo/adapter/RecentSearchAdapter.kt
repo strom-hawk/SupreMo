@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.demoapps.supremo.R
+import com.demoapps.supremo.interfaces.RecentSearchCallBack
 import kotlinx.android.synthetic.main.recent_search_layout.view.*
 
 class RecentSearchAdapter(
     private val context: Context,
-    private val recentSearchList: List<String>
+    private val recentSearchList: List<String>,
+    private val recentSearchCallBack: RecentSearchCallBack
 ) : RecyclerView.Adapter<RecentSearchAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -24,6 +26,9 @@ class RecentSearchAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.recentSuperHeroName.text = recentSearchList.get(position)
+        holder.itemView.setOnClickListener {
+            recentSearchCallBack.onItemClickListener(holder.recentSuperHeroName.text.toString())
+        }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

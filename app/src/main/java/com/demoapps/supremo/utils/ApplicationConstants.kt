@@ -12,5 +12,5 @@ object ApplicationConstants {
     val EMPTY_STRING = ""
     val TOOL_BAR_COLOR = "#434343"
     val SUPERHEROS_AND_VILLAINS = "SuperHeros & Villains"
-    val RESULTS = "RESULTS"
+    val RESULTS = "Results"
 }

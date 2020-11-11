@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/deep_space_gradiant"
+    android:orientation="vertical"
+    tools:context=".view.HomeScreen">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSuperHeros"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.9"
+        android:paddingStart="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_10"
+        tools:listitem="@layout/result_item_layout"
+        tools:itemCount="4">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

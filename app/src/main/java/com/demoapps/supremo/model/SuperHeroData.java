@@ -3,7 +3,7 @@ package com.demoapps.supremo.model;
 public class SuperHeroData {
 
     private String name;
-    private String description;
+    private String groupAffiliation;
     private String imageUrl;
 
     public String getName() {
@@ -14,12 +14,12 @@ public class SuperHeroData {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getGroupAffiliation() {
+        return groupAffiliation;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setGroupAffiliation(String groupAffiliation) {
+        this.groupAffiliation = groupAffiliation;
     }
 
     public String getImageUrl() {

@@ -1,6 +1,7 @@
 package com.demoapps.supremo.view
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
@@ -11,6 +12,7 @@ import com.demoapps.supremo.adapter.RecentSearchAdapter
 import com.demoapps.supremo.interfaces.FlowCallBack
 import com.demoapps.supremo.interfaces.RecentSearchCallBack
 import com.demoapps.supremo.model.MainResponse
+import com.demoapps.supremo.model.SuperHeroData
 import com.demoapps.supremo.utils.ApplicationConstants
 import com.demoapps.supremo.utils.CommonUtils
 import com.demoapps.supremo.utils.Router
@@ -23,7 +25,6 @@ import kotlinx.android.synthetic.main.activity_homescreen.*
 
 class HomeScreen : ActivityBase(), FlowCallBack, RecentSearchCallBack {
     private var homeScreenViewModel: HomeScreenViewModel? = null
-    private val tempData = ArrayList<String>()
     private val recentSearch = ArrayList<String>()
     private var recentSearchSet:Set<String>? = null
     private var sharedPreferences: SharedPreferences? = null
@@ -90,17 +91,33 @@ class HomeScreen : ActivityBase(), FlowCallBack, RecentSearchCallBack {
         if (mainResponse.response.equals(ApplicationConstants.TXN_ERROR)) {
             CommonUtils.showAlertDialog(this, mainResponse.errorMessage, false)
         } else {
-            val sharedPreferencesEditor = sharedPreferences?.edit()
-            val updatedRecentSearch= HashSet<String>()
-            recentSearch.add(Router.searchSuperHeroName)
-            updatedRecentSearch.addAll(recentSearch)
-
-            sharedPreferencesEditor?.putStringSet(ApplicationConstants.RECENT_SEARCHES_KEY, updatedRecentSearch)
-            sharedPreferencesEditor?.apply()
-
+            putSuccessFullSearchToSharedPref()
             rvRecentSearch.adapter?.notifyDataSetChanged()
+            putReceivedResultInRouter(mainResponse)
 
-            Router.startSuperHeroDisplayFlow()
+            val intent = Intent(this, SuperHeroLandingActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun putSuccessFullSearchToSharedPref(){
+        val sharedPreferencesEditor = sharedPreferences?.edit()
+        val updatedRecentSearch= HashSet<String>()
+        recentSearch.add(Router.searchSuperHeroName)
+        updatedRecentSearch.addAll(recentSearch)
+
+        sharedPreferencesEditor?.putStringSet(ApplicationConstants.RECENT_SEARCHES_KEY, updatedRecentSearch)
+        sharedPreferencesEditor?.apply()
+    }
+
+    private fun putReceivedResultInRouter(mainResponse: MainResponse){
+        for((index, item) in mainResponse.results.withIndex()){
+            val superHeroDetails = SuperHeroData()
+            superHeroDetails.name = item.superHeroName
+            superHeroDetails.groupAffiliation = item.connections.groupAffiliation
+            superHeroDetails.imageUrl = item.superHeroImage.url
+
+            Router.superHerosList.add(superHeroDetails)
         }
     }
 

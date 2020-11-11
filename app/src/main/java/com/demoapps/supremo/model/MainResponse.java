@@ -19,9 +19,9 @@ public class MainResponse {
     @Expose
     private String errorMessage;
 
-    /*@SerializedName("results")
+    @SerializedName("results")
     @Expose
-    private ArrayList<Results> results;*/
+    private ArrayList<Results> results;
 
     public String getResponse() {
         return response;
@@ -39,11 +39,11 @@ public class MainResponse {
         this.errorMessage = errorMessage;
     }
 
-    /*public ArrayList<Results> getResults() {
+    public ArrayList<Results> getResults() {
         return results;
     }
 
     public void setResults(ArrayList<Results> results) {
         this.results = results;
-    }*/
+    }
 }

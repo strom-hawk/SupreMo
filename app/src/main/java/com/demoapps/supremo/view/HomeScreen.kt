@@ -111,12 +111,19 @@ class HomeScreen : ActivityBase(), FlowCallBack, RecentSearchCallBack {
     }
 
     private fun putReceivedResultInRouter(mainResponse: MainResponse){
+        Router.superHerosList.clear()
         for((index, item) in mainResponse.results.withIndex()){
             val superHeroDetails = SuperHeroData()
             superHeroDetails.name = item.superHeroName
             superHeroDetails.groupAffiliation = item.connections.groupAffiliation
             superHeroDetails.imageUrl = item.superHeroImage.url
-
+            superHeroDetails.race = item.appearance.race
+            superHeroDetails.gender = item.appearance.gender
+            if(item.appearance.height.size == 1){
+                superHeroDetails.height = item.appearance.height[0]
+            }else if(item.appearance.height.size == 2){
+                superHeroDetails.height = item.appearance.height[1]
+            }
             Router.superHerosList.add(superHeroDetails)
         }
     }

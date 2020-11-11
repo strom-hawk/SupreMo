@@ -16,6 +16,10 @@ public class Results {
     @Expose
     private SuperHeroImage superHeroImage;
 
+    @SerializedName("appearance")
+    @Expose
+    private Appearance appearance;
+
     public String getSuperHeroName() {
         return superHeroName;
     }
@@ -38,5 +42,13 @@ public class Results {
 
     public void setSuperHeroImage(SuperHeroImage superHeroImage) {
         this.superHeroImage = superHeroImage;
+    }
+
+    public Appearance getAppearance() {
+        return appearance;
+    }
+
+    public void setAppearance(Appearance appearance) {
+        this.appearance = appearance;
     }
 }

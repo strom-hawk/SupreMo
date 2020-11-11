@@ -1,5 +1,6 @@
 package com.demoapps.supremo.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +27,8 @@ class SuperHeroLandingActivity : ActivityBase(), SuperHerosCallBack {
     }
 
     override fun onItemClickListener(itemNumber: Int) {
-        Log.d("lllll;", itemNumber.toString())
+        Router.selectedSuperHeroNumber = itemNumber
+        val intent = Intent(this, SuperHeroDetailsActivity::class.java)
+        startActivity(intent)
     }
 }

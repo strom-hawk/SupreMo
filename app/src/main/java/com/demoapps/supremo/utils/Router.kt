@@ -12,5 +12,5 @@ import com.demoapps.supremo.view.SuperHeroLandingActivity
 object Router {
     var searchSuperHeroName = ""
     var superHerosList = ArrayList<SuperHeroData>()
-
+    var selectedSuperHeroNumber = 0
 }

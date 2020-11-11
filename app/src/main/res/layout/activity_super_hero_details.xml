@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/deep_space_gradiant"
+    android:orientation="vertical"
+    tools:context=".view.HomeScreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+
+        <ImageView
+            android:id="@+id/superHeroImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/superHeroName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/superHeroDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="dsafasfdsaf" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/superHeroRace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Race" />
+
+            <TextView
+                android:id="@+id/superHeroRaceValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Race Value" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/superHeroGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender" />
+
+            <TextView
+                android:id="@+id/superHeroGenderValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Gender Value" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/superHeroHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Height" />
+
+            <TextView
+                android:id="@+id/superHeroHeightValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Height Value" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

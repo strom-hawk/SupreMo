@@ -14,3 +14,12 @@ An android application delivers details of superheros in your fingertips. Follow
 5. Async Task: RxJava</br>
 6. Image downloading library: Picasso</br>
 8. Singleton class</br>
+9. Shared preference for storing recent searches.</br>
+
+</br>
+Build Instructions:</br>
+1. Clone the project in android studio.</br>
+2. Make sure to have latest android studio installed as the project is running on androidX.</br>
+3. No need to add any dependency. Everything is added in build.gralde(app level).</br>
+4. Open the project in android studio and build it.</br>
+5. Once build is successfull, run it in the device or emulator.</br>

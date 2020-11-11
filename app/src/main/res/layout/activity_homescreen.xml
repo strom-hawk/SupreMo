@@ -18,9 +18,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
-            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_10"
             android:background="@drawable/edit_text_background"
             android:padding="@dimen/dp_5">
 

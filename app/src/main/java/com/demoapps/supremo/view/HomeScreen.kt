@@ -1,10 +1,13 @@
 package com.demoapps.supremo.view
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demoapps.supremo.R
+import com.demoapps.supremo.adapter.RecentSearchAdapter
 import com.demoapps.supremo.interfaces.FlowCallBack
 import com.demoapps.supremo.model.MainResponse
 import com.demoapps.supremo.utils.ApplicationConstants
@@ -19,6 +22,10 @@ import kotlinx.android.synthetic.main.activity_homescreen.*
 
 class HomeScreen : ActivityBase(), FlowCallBack {
     private var homeScreenViewModel: HomeScreenViewModel? = null
+    private val tempData = ArrayList<String>()
+    private val recentSearch = ArrayList<String>()
+    private var recentSearchSet:Set<String>? = null
+    private var sharedPreferences: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +37,31 @@ class HomeScreen : ActivityBase(), FlowCallBack {
 
     private fun init() {
         homeScreenViewModel = HomeScreenViewModel(this)
+        initSharedPref()
         initRecentSearch()
-        val linearLayoutManager = LinearLayoutManager(this)
-        rvRecentSearch.layoutManager = linearLayoutManager
+    }
+
+    private fun initSharedPref(){
+        sharedPreferences = this.getSharedPreferences(ApplicationConstants.RECENT_SEARCHES_SHARED_PREF_FILE, Context.MODE_PRIVATE)
     }
 
     private fun initRecentSearch() {
-        //GET DATA FROM SHARED PREF FOR RECENT SEARCH
+        recentSearchSet = sharedPreferences?.getStringSet(ApplicationConstants.RECENT_SEARCHES_KEY, null)
+        recentSearchSet?.forEach {
+            recentSearch.add(it)
+        }
+
+        if(recentSearch.isEmpty()){
+            noItemsError.visibility = View.VISIBLE
+            rvRecentSearch.visibility = View.GONE
+        }else{
+            noItemsError.visibility = View.GONE
+            rvRecentSearch.visibility = View.VISIBLE
+            val linearLayoutManager = LinearLayoutManager(this)
+            rvRecentSearch.layoutManager = linearLayoutManager
+            rvRecentSearch.adapter = RecentSearchAdapter(this, recentSearch)
+            rvRecentSearch.adapter?.notifyDataSetChanged()
+        }
     }
 
     private fun bindView() {
@@ -64,7 +89,16 @@ class HomeScreen : ActivityBase(), FlowCallBack {
         if (mainResponse.response.equals(ApplicationConstants.TXN_ERROR)) {
             CommonUtils.showAlertDialog(this, mainResponse.errorMessage, false)
         } else {
-            //PUT DATA TO SHARED PREF FOR RECENT SEARCH
+            val sharedPreferencesEditor = sharedPreferences?.edit()
+            val updatedRecentSearch= HashSet<String>()
+            recentSearch.add(Router.searchSuperHeroName)
+            updatedRecentSearch.addAll(recentSearch)
+
+            sharedPreferencesEditor?.putStringSet(ApplicationConstants.RECENT_SEARCHES_KEY, updatedRecentSearch)
+            sharedPreferencesEditor?.apply()
+
+            rvRecentSearch.adapter?.notifyDataSetChanged()
+
             Router.startSuperHeroDisplayFlow()
         }
     }
